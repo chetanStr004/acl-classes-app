@@ -1,20 +1,15 @@
-# Use an official OpenJDK runtime as a parent image
-FROM eclipse-temurin:21-jdk-alpine
-
-# Set the working directory in the container
+# Build Stage
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
 WORKDIR /app
-
-# Copy the project's pom.xml and source code
 COPY pom.xml .
 COPY src ./src
-COPY .mvn ./.mvn
-COPY mvnw .
+# Build the application using the maven image's mvn, skipping tests
+RUN mvn clean package -DskipTests
 
-# Initial check.
-RUN ./mvnw dependency:go-offline
-
-# Package the application
-RUN ./mvnw clean package -DskipTests
-
-# Run the jar file
-CMD ["java", "-jar", "target/backend-0.0.1-SNAPSHOT.jar"]
+# Run Stage
+FROM eclipse-temurin:21-jdk-alpine
+WORKDIR /app
+# Copy the jar from the build stage
+COPY --from=build /app/target/*.jar app.jar
+EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]
