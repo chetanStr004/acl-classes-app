@@ -55,6 +55,10 @@ public class SecurityConfiguration {
             allowedOrigin = "*";
         }
         
+        if (allowedOrigin.endsWith("/")) {
+            allowedOrigin = allowedOrigin.substring(0, allowedOrigin.length() - 1);
+        }
+        
         configuration.setAllowedOrigins(Arrays.asList(allowedOrigin));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*")); // Allow all headers
