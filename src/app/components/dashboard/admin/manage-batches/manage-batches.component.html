@@ -1,0 +1,111 @@
+<div class="admin-page-content">
+    <div class="batches-header">
+        <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search batches..." (input)="onSearch($event)">
+        </div>
+    </div>
+
+    <!-- Message Display (same as before) -->
+    <div *ngIf="message()" class="feedback-msg" [class.success]="message()?.type === 'success'"
+        [class.error]="message()?.type === 'error'">
+        <i class="fa-solid" [class.fa-check-circle]="message()?.type === 'success'"
+            [class.fa-circle-exclamation]="message()?.type === 'error'"></i>
+        {{ message()?.text }}
+    </div>
+
+    <div class="batches-grid">
+        <!-- Create Batch Form -->
+        <div class="create-card glass">
+            <h3><i class="fa-solid fa-plus-circle"></i> Create New Batch</h3>
+            <form [formGroup]="batchForm" (ngSubmit)="onBatchSubmit()">
+                <div class="form-group">
+                    <label>Batch Name</label>
+                    <input type="text" formControlName="name" placeholder="e.g. Morning Excellence">
+                </div>
+                <div class="form-group">
+                    <label>Timing</label>
+                    <input type="text" formControlName="timing" placeholder="e.g. 8:00 AM - 10:00 AM">
+                </div>
+                <button type="submit" [disabled]="batchForm.invalid" class="create-btn">
+                    Create Batch
+                </button>
+            </form>
+        </div>
+
+        <!-- Batches Table -->
+        <div class="list-card glass">
+            <h3><i class="fa-solid fa-list-check"></i> Existing Batches</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Batch Name</th>
+                            <th>Timing</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let batch of filteredBatches()">
+                            <td>{{ batch.name }}</td>
+                            <td>{{ batch.timing }}</td>
+                            <td>
+                                <span class="status-pill" [class.active]="batch.active"
+                                    [class.inactive]="!batch.active">
+                                    {{ batch.active ? 'Active' : 'Inactive' }}
+                                </span>
+                            </td>
+                            <td class="actions">
+                                <button class="action-btn edit" (click)="openEditModal(batch)" title="Edit">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button class="action-btn status" (click)="toggleBatchStatus(batch)"
+                                    [title]="batch.active ? 'Deactivate' : 'Activate'">
+                                    <i class="fa-solid" [class.fa-toggle-on]="batch.active"
+                                        [class.fa-toggle-off]="!batch.active"></i>
+                                </button>
+                                <button class="action-btn delete" (click)="deleteBatch(batch)" title="Delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="filteredBatches().length === 0">
+                            <td colspan="4" class="empty">No batches found.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Batch Modal -->
+    <div class="modal-overlay" *ngIf="editingBatch()" (click)="closeEditModal()">
+        <div class="modal-content glass" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Edit Batch</h3>
+                <button class="close-btn" (click)="closeEditModal()">&times;</button>
+            </div>
+            <form [formGroup]="editBatchForm" (ngSubmit)="onEditSubmit()">
+                <div class="form-group">
+                    <label>Batch Name</label>
+                    <input type="text" formControlName="name">
+                </div>
+                <div class="form-group">
+                    <label>Timing</label>
+                    <input type="text" formControlName="timing">
+                </div>
+                <div class="form-group checkbox-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" formControlName="active">
+                        <span class="toggle-text">Active Status</span>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="cancel-btn" (click)="closeEditModal()">Cancel</button>
+                    <button type="submit" [disabled]="editBatchForm.invalid" class="save-btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

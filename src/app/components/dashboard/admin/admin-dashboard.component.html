@@ -1,0 +1,22 @@
+<div class="dashboard-container">
+    <header class="dash-header">
+        <h1>Admin <span>Dashboard</span></h1>
+        <p>Manage batches and students enrollment</p>
+    </header>
+
+    <nav class="dash-nav glass">
+        <a routerLink="batches" routerLinkActive="active" class="nav-tab">
+            <i class="fa-solid fa-layer-group"></i> Manage Batches
+        </a>
+        <a routerLink="register" routerLinkActive="active" class="nav-tab">
+            <i class="fa-solid fa-user-plus"></i> Register Student
+        </a>
+        <a routerLink="students" routerLinkActive="active" class="nav-tab">
+            <i class="fa-solid fa-users"></i> Batch Students
+        </a>
+    </nav>
+
+    <main class="dash-content">
+        <router-outlet></router-outlet>
+    </main>
+</div>

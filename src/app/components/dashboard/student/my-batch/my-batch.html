@@ -1,0 +1,56 @@
+<div class="dash-grid single">
+    <section class="dash-card glass">
+        <h3><i class="fa-solid fa-calendar-check"></i> My Enrolled Batch</h3>
+
+        <div *ngIf="loading()" class="loading-state">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <p>Fetching your batch details...</p>
+        </div>
+
+        <div *ngIf="error()" class="feedback-banner error">
+            <i class="fa-solid fa-exclamation-circle"></i> {{ error() }}
+        </div>
+
+        <div class="batch-details" *ngIf="!loading() && batch()">
+            <div class="detail-row">
+                <span class="label">Batch Name:</span>
+                <span class="value">{{ batch()?.name }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Timing:</span>
+                <span class="value">{{ batch()?.timing }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Status:</span>
+                <span class="status-badge active">Active</span>
+            </div>
+        </div>
+
+        <div *ngIf="!loading() && !batch() && !error()" class="empty-state">
+            <i class="fa-solid fa-user-clock"></i>
+            <p>You are not currently enrolled in any batch.</p>
+            <p class="sub-text">Please contact admin for enrollment.</p>
+        </div>
+    </section>
+
+    <!-- Tips Section (Preserved) -->
+    <aside class="dash-tips glass">
+        <h3><i class="fa-solid fa-lightbulb"></i> Study Tips</h3>
+        <ul class="tips-list">
+            <li>
+                <i class="fa-solid fa-clock"></i>
+                <div>
+                    <strong>Be Punctual</strong>
+                    <p>Join batches 5 minutes before timing.</p>
+                </div>
+            </li>
+            <li>
+                <i class="fa-solid fa-book-open"></i>
+                <div>
+                    <strong>Keep Notes</strong>
+                    <p>Maintain separate registers for each subject.</p>
+                </div>
+            </li>
+        </ul>
+    </aside>
+</div>

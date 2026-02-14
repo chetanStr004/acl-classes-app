@@ -1,0 +1,40 @@
+<div class="dash-grid single">
+    <section class="dash-card glass">
+        <h3><i class="fa-solid fa-list-ul"></i> All Available Batches</h3>
+
+        <div *ngIf="loading()" class="loading-state">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <p>Fetching all batches...</p>
+        </div>
+
+        <div *ngIf="error()" class="feedback-banner error">
+            <i class="fa-solid fa-exclamation-circle"></i> {{ error() }}
+        </div>
+
+        <div class="table-container" *ngIf="!loading()">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Batch Name</th>
+                        <th>Timing</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let b of batches()">
+                        <td>{{ b.name }}</td>
+                        <td>{{ b.timing }}</td>
+                        <td>
+                            <span class="status-badge" [class.active]="b.active" [class.inactive]="!b.active">
+                                {{ b.active ? 'Active' : 'Inactive' }}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr *ngIf="batches().length === 0">
+                        <td colspan="3" class="empty">No public batches available.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

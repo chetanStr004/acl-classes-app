@@ -1,0 +1,69 @@
+.space-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: black;
+  overflow: hidden;
+}
+
+/* Stars */
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png') repeat top center;
+  z-index: 0;
+}
+
+/* Twinkling Effect */
+.twinkling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png') repeat top center;
+  z-index: 1;
+  animation: move-twinkling 200s linear infinite;
+  opacity: 0.5;
+}
+
+/* Nebula / Clouds */
+.nebula {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent; 
+  /* Using a gradient or SVG for nebula effect if image not available, 
+     but for now let's use a subtle gradient overlay to give depth */
+  background: radial-gradient(circle at 50% 50%, rgba(76, 29, 149, 0.2), rgba(0, 0, 0, 0));
+  z-index: 2;
+  animation: pulse-nebula 10s ease-in-out infinite alternate;
+}
+
+@keyframes move-twinkling {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+
+@keyframes pulse-nebula {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}

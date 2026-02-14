@@ -1,0 +1,75 @@
+<div class="admin-page-content">
+    <div *ngIf="message()" class="feedback-banner" [class.success]="message()?.type === 'success'"
+        [class.error]="message()?.type === 'error'">
+        <i class="fa-solid" [class.fa-check-circle]="message()?.type === 'success'"
+            [class.fa-circle-exclamation]="message()?.type === 'error'"></i>
+        {{ message()?.text }}
+    </div>
+
+    <section class="registration-card glass">
+        <h3><i class="fa-solid fa-user-plus"></i> Student Enrollment</h3>
+        <p class="subtitle">Complete the form below to register a new student and set up their portal access.</p>
+
+        <form [formGroup]="studentForm" (ngSubmit)="onStudentSubmit()" class="registration-form">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-user"></i> Full Name</label>
+                    <input type="text" formControlName="name" placeholder="Enter student's full name">
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-phone"></i> Phone Number</label>
+                    <input type="text" formControlName="phone" placeholder="Enter mobile number">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-envelope"></i> Email Address</label>
+                    <input type="email" formControlName="email" placeholder="student.name@example.com">
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-layer-group"></i> Assigned Batch</label>
+                    <select formControlName="batchId">
+                        <option value="" disabled selected>-- Select a Batch --</option>
+                        <option *ngFor="let b of batches()" [ngValue]="b.id">{{ b.name }} ({{ b.timing }})</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-toggle-on"></i> Account Status</label>
+                    <select formControlName="active">
+                        <option [ngValue]="true">Active</option>
+                        <option [ngValue]="false">Inactive</option>
+                    </select>
+                </div>
+                <!-- Empty div to maintain 2-column grid alignment if needed, 
+                     or let the next section handle its own grid -->
+                <div class="form-group hidden-on-mobile"></div>
+            </div>
+
+            <div class="auth-section">
+                <h4><i class="fa-solid fa-shield-halved"></i> Security Credentials</h4>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-id-card"></i> Portal Username</label>
+                        <input type="text" formControlName="username" placeholder="Choose a username">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-key"></i> Initial Password</label>
+                        <div class="input-wrapper">
+                            <input [type]="showPassword() ? 'text' : 'password'" formControlName="password"
+                                placeholder="Create a secure password">
+                            <button type="button" class="eye-btn" (click)="showPassword.set(!showPassword())"
+                                [title]="showPassword() ? 'Hide password' : 'Show password'">
+                                <i class="fa-solid" [class.fa-eye]="!showPassword()"
+                                    [class.fa-eye-slash]="showPassword()"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" [disabled]="studentForm.invalid">
+                <i class="fa-solid fa-user-check"></i> Register Student & Create Portal
+            </button>
+        </form>
+    </section>
+</div>

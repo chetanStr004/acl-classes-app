@@ -1,0 +1,56 @@
+<section class="contact-page">
+    <div class="contact-container">
+        <div class="contact-header">
+            <h1>Contact <span>Us</span></h1>
+            <p>Have questions? Reach out to us and we'll get back to you as soon as possible.</p>
+        </div>
+
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" formControlName="firstName" placeholder="John"
+                        [class.error]="submitted && contactForm.get('firstName')?.errors">
+                    <small *ngIf="submitted && contactForm.get('firstName')?.errors" class="error-msg">First name is
+                        required</small>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" formControlName="lastName" placeholder="Doe"
+                        [class.error]="submitted && contactForm.get('lastName')?.errors">
+                    <small *ngIf="submitted && contactForm.get('lastName')?.errors" class="error-msg">Last name is
+                        required</small>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" formControlName="email" placeholder="john.doe@example.com"
+                        [class.error]="submitted && contactForm.get('email')?.errors">
+                    <small *ngIf="submitted && contactForm.get('email')?.errors?.['required']" class="error-msg">Email
+                        is required</small>
+                    <small *ngIf="submitted && contactForm.get('email')?.errors?.['email']" class="error-msg">Invalid
+                        email format</small>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" formControlName="phone" placeholder="+91 9876543210"
+                        [class.error]="submitted && contactForm.get('phone')?.errors">
+                    <small *ngIf="submitted && contactForm.get('phone')?.errors" class="error-msg">Valid phone number is
+                        required</small>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="message">Your Message</label>
+                <textarea id="message" formControlName="message" rows="5" placeholder="Tell us how we can help you..."
+                    [class.error]="submitted && contactForm.get('message')?.errors"></textarea>
+                <small *ngIf="submitted && contactForm.get('message')?.errors" class="error-msg">Message must be at
+                    least 10 characters</small>
+            </div>
+
+            <button type="submit" class="submit-btn text-white">SEND MESSAGE</button>
+        </form>
+    </div>
+</section>

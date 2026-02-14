@@ -1,1 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* GLOBAL RESETS & THEME */
+:root {
+    --primary-color: #0d47a1;
+    --secondary-color: #5a2d82;
+    /* Deep Purple */
+    --accent-color: #00e5ff;
+    /* Neon Cyan */
+    --highlight-color: #d500f9;
+    /* Neon Pink */
+    --text-main: #ffffff;
+    --text-secondary: #aaaaaa;
+    --bg-dark: #000000;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    /* Very subtle glass */
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Orbitron', 'Inter', sans-serif;
+    /* Fallback to Inter if Orbitron load fails or isn't added yet (will add link in index.html) */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--highlight-color);
+}

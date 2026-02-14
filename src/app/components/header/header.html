@@ -1,0 +1,25 @@
+<header>
+  <div class="logo" (click)="scrollToSection('top')">
+    ACL <span>Classes</span>
+  </div>
+
+  <button class="mobile-menu-btn" (click)="toggleMenu()">
+    <i class="fa-solid" [class.fa-bars]="!isMenuOpen()" [class.fa-xmark]="isMenuOpen()"></i>
+  </button>
+
+  <nav [class.open]="isMenuOpen()">
+    <ul>
+      <li><a (click)="scrollToSection('top')">Home</a></li>
+      <li><a (click)="scrollToSection('about')">About</a></li>
+      <li><a (click)="scrollToSection('academics')">Academics</a></li>
+      <li><a (click)="scrollToSection('facilities')">Facilities</a></li>
+      <li><a (click)="scrollToSection('gallery')">Gallery</a></li>
+      <li><a routerLink="/contact" (click)="isMenuOpen.set(false)">Contact</a></li>
+      <li *ngIf="!authService.isAuthenticated()"><a routerLink="/login" class="cta-link"
+          (click)="isMenuOpen.set(false)">Login</a></li>
+      <li *ngIf="authService.isAuthenticated()"><a [routerLink]="getDashboardLink()" class="dashboard-link"
+          (click)="isMenuOpen.set(false)">Dashboard</a></li>
+      <li *ngIf="authService.isAuthenticated()"><a (click)="logout()" class="logout-link">Logout</a></li>
+    </ul>
+  </nav>
+</header>

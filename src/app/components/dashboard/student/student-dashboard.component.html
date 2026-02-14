@@ -1,0 +1,19 @@
+<div class="dashboard-container">
+    <header class="dash-header">
+        <h1>Student <span>Portal</span></h1>
+        <p>Manage your learning journey</p>
+    </header>
+
+    <nav class="dash-nav glass">
+        <a routerLink="my-batch" routerLinkActive="active" class="nav-item">
+            <i class="fa-solid fa-calendar-check"></i> My Batch
+        </a>
+        <a routerLink="all-batches" routerLinkActive="active" class="nav-item">
+            <i class="fa-solid fa-list"></i> All Batches
+        </a>
+    </nav>
+
+    <div class="dash-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>
