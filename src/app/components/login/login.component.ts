@@ -39,7 +39,7 @@ export class LoginComponent {
             console.log('--- STARTING LOGIN ATTEMPT ---', username);
 
             this.authService.login(this.loginForm.value).pipe(
-                timeout(8000), // Slightly shorter timeout for testing
+                timeout(60000), // Increased to 60s for Render cold starts
                 catchError(err => {
                     console.error('Inner catchError:', err);
                     // Pass it down to subscribe error block
