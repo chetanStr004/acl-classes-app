@@ -25,6 +25,7 @@ com/acl/backend/BackendApplication.class
 com/acl/backend/controller/StudentController.class
 com/acl/backend/service/AdminService.class
 com/acl/backend/controller/AuthController.class
+com/acl/backend/controller/HealthController.class
 com/acl/backend/service/AuthService.class
 com/acl/backend/dto/RegisterRequest$RegisterRequestBuilder.class
 com/acl/backend/dto/BatchDTO$BatchDTOBuilder.class

@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/auth/**", "/api/health").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority("ACL_ADMIN")
                         .requestMatchers("/api/student/**").hasAnyAuthority("STUDENT", "ACL_ADMIN")
                         .anyRequest().authenticated()
